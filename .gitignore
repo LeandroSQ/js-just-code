@@ -1,0 +1,9 @@
+dist/*.js
+dist/*.ttf
+dist/*.txt
+dist
+node_modules
+*-lock.json
+*.lock
+.DS_Store
+*-error.log

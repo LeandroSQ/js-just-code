@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>JustCode</title>
+		<link rel="stylesheet" href="styles/style.css"/>
+	</head>
+	<body>
+		<section id="wrapper">
+			<div class="container editor">
+				<header class="font">
+					<button onclick="settings(this)">
+						<i class="fas fa-cog"></i>
+					</button>
+
+					Source code
+				</header>
+
+				<div id="editor"></div>
+			</div>
+
+			<span class="separator"></span>
+
+			<div class="container output font">
+				<header>
+					Console
+
+					<button onclick="runCode(this)">
+						<i class="fas fa-play"></i>
+					</button>
+				</header>
+
+				<div id="output"></div>
+			</div>
+		</section>
+	</body>
+</html>
