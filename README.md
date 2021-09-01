@@ -22,3 +22,4 @@ The philosophy of JustCode, as the name suggests, is to provide an environment t
 | [VM Browser polyfill](https://github.com/snanovskyi/vm-browser) | Not used anymore, but serves as inspiration for [evaluator.js](./src/evaluator.js) |
 | [Monaco themes](https://github.com/brijeshb42/monaco-themes) | Providing beautiful color themes for the editor |
 | [Monaco theme converter](https://github.com/Nishkalkashyap/monaco-vscode-textmate-theme-converter) | For converting VSCode themes |
+| [One Dark Pro](https://github.com/Binaryify/OneDark-Pro) | The theme used in the editor |

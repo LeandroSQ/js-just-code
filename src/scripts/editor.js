@@ -2,24 +2,24 @@
 // BEGIN_FEATURES
 import "monaco-editor/esm/vs/editor/browser/controller/coreCommands.js";
 import "monaco-editor/esm/vs/editor/browser/widget/codeEditorWidget.js";
-import "monaco-editor/esm/vs/editor/browser/widget/diffEditorWidget.js";
-import "monaco-editor/esm/vs/editor/browser/widget/diffNavigator.js";
+// import "monaco-editor/esm/vs/editor/browser/widget/diffEditorWidget.js";
+// import "monaco-editor/esm/vs/editor/browser/widget/diffNavigator.js";
 import "monaco-editor/esm/vs/editor/contrib/anchorSelect/anchorSelect.js";
 import "monaco-editor/esm/vs/editor/contrib/bracketMatching/bracketMatching.js";
 import "monaco-editor/esm/vs/editor/contrib/caretOperations/caretOperations.js";
 import "monaco-editor/esm/vs/editor/contrib/caretOperations/transpose.js";
 import "monaco-editor/esm/vs/editor/contrib/clipboard/clipboard.js";
 import "monaco-editor/esm/vs/editor/contrib/codeAction/codeActionContributions.js";
-import "monaco-editor/esm/vs/editor/contrib/codelens/codelensController.js";
-import "monaco-editor/esm/vs/editor/contrib/colorPicker/colorContributions.js";
+// import "monaco-editor/esm/vs/editor/contrib/codelens/codelensController.js";
+// import "monaco-editor/esm/vs/editor/contrib/colorPicker/colorContributions.js";
 import "monaco-editor/esm/vs/editor/contrib/comment/comment.js";
-import "monaco-editor/esm/vs/editor/contrib/contextmenu/contextmenu.js";
+// import "monaco-editor/esm/vs/editor/contrib/contextmenu/contextmenu.js";
 import "monaco-editor/esm/vs/editor/contrib/cursorUndo/cursorUndo.js";
-import "monaco-editor/esm/vs/editor/contrib/dnd/dnd.js";
-import "monaco-editor/esm/vs/editor/contrib/documentSymbols/documentSymbols.js";
+// import "monaco-editor/esm/vs/editor/contrib/dnd/dnd.js";
+// import "monaco-editor/esm/vs/editor/contrib/documentSymbols/documentSymbols.js";
 import "monaco-editor/esm/vs/editor/contrib/find/findController.js";
 import "monaco-editor/esm/vs/editor/contrib/folding/folding.js";
-// import "monaco-editor/esm/vs/editor/contrib/fontZoom/fontZoom.js";
+import "monaco-editor/esm/vs/editor/contrib/fontZoom/fontZoom.js";
 import "monaco-editor/esm/vs/editor/contrib/format/formatActions.js";
 // import "monaco-editor/esm/vs/editor/contrib/gotoError/gotoError.js";
 // import "monaco-editor/esm/vs/editor/contrib/gotoSymbol/goToCommands.js";
@@ -35,23 +35,23 @@ import "monaco-editor/esm/vs/editor/contrib/multicursor/multicursor.js";
 import "monaco-editor/esm/vs/editor/contrib/parameterHints/parameterHints.js";
 import "monaco-editor/esm/vs/editor/contrib/rename/rename.js";
 import "monaco-editor/esm/vs/editor/contrib/smartSelect/smartSelect.js";
-import "monaco-editor/esm/vs/editor/contrib/snippet/snippetController2.js";
+// import "monaco-editor/esm/vs/editor/contrib/snippet/snippetController2.js";
 import "monaco-editor/esm/vs/editor/contrib/suggest/suggestController.js";
 // import "monaco-editor/esm/vs/editor/contrib/toggleTabFocusMode/toggleTabFocusMode.js";
 import "monaco-editor/esm/vs/editor/contrib/unusualLineTerminators/unusualLineTerminators.js";
-import "monaco-editor/esm/vs/editor/contrib/viewportSemanticTokens/viewportSemanticTokens.js";
+// import "monaco-editor/esm/vs/editor/contrib/viewportSemanticTokens/viewportSemanticTokens.js";
 import "monaco-editor/esm/vs/editor/contrib/wordHighlighter/wordHighlighter.js";
 import "monaco-editor/esm/vs/editor/contrib/wordOperations/wordOperations.js";
 import "monaco-editor/esm/vs/editor/contrib/wordPartOperations/wordPartOperations.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/accessibilityHelp/accessibilityHelp.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/iPadShowKeyboard/iPadShowKeyboard.js";
-import "monaco-editor/esm/vs/editor/standalone/browser/inspectTokens/inspectTokens.js";
+// import "monaco-editor/esm/vs/editor/standalone/browser/inspectTokens/inspectTokens.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneCommandsQuickAccess.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneGotoLineQuickAccess.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneGotoSymbolQuickAccess.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/quickAccess/standaloneHelpQuickAccess.js";
 // import "monaco-editor/esm/vs/editor/standalone/browser/referenceSearch/standaloneReferenceSearch.js";
-import "monaco-editor/esm/vs/editor/standalone/browser/toggleHighContrast/toggleHighContrast.js";
+// import "monaco-editor/esm/vs/editor/standalone/browser/toggleHighContrast/toggleHighContrast.js";
 // END_FEATURES
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 
@@ -66,55 +66,85 @@ self.MonacoEnvironment = {
 	}
 };
 
-const editorElement = document.getElementById("editor");
-
-window._instance = monaco.editor.create(editorElement, {
-	value: `function measure(callback) {
-    let start = performance.now();
-    callback();
-    let end = performance.now();
-    let elapsed = end - start;
-    console.log(\`Elapsed: \${elapsed}ms\`);
+function setup() {
+	const editorElement = document.getElementById("editor");
+	const initialCode = `function measure(callback) {
+	let start = performance.now();
+	callback();
+	let end = performance.now();
+	let elapsed = end - start;
+	console.log(\`Elapsed: \${elapsed}ms\`);
 }
 
 measure(() => {
-    let buffer = [ ];
-    for (let j = 0; j < 1000; j++) {
-        for (let i = 0; i < 10000; i++) {
-            buffer.push(Math.sqrt(i));
-        }
-    }
-});`,
-	roundedSelection: true,
-	theme: "vs-dark",
-	fontSize: "14pt",
-	tabSize: 4,
-	useTabStops: true,
-	insertSpaces: false,
-	wordWrapMinified: true,
-	wrappingIndent: "indent",
-	padding: {
-		top: 10,
-		bottom: 10
-	},
-	minimap: {
-		enabled: false
-	},
-	language: "javascript"
-});
+	let buffer = [ ];
+	for (let j = 0; j < 1000; j++) {
+		for (let i = 0; i < 10000; i++) {
+			buffer.push(Math.sqrt(i));
+		}
+	}
+});`;
 
-monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
-	noSemanticValidation: true,
-	noSyntaxValidation: false
-});
+	window._instance = monaco.editor.create(editorElement, {
+		value: initialCode,
+		roundedSelection: true,
+		fontSize: "14pt",
+		tabSize: 4,
+		useTabStops: true,
+		insertSpaces: false,
+		wordWrapMinified: true,
+		wrappingIndent: "indent",
+		padding: {
+			top: 10,
+			bottom: 10
+		},
+		minimap: {
+			enabled: false
+		},
+		language: "javascript"
+	});
+	
+	monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+		noSemanticValidation: true,
+		noSyntaxValidation: false
+	});
 
-monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
-	target: monaco.languages.typescript.ScriptTarget.ES6,
-	allowNonTsExtensions: true
-});
+	monaco.languages.typescript.javascriptDefaults.setCompilerOptions({
+		target: monaco.languages.typescript.ScriptTarget.ES6,
+		allowNonTsExtensions: true
+	});
 
-window._monaco = monaco.editor;
+	window._monaco = monaco.editor;
 
-Theme.loadTheme(import("./../themes/OneDarkPro.json"), "OneDarkPro");
+	redefineBindings();
+
+	Theme.loadTheme(import("./../themes/OneDarkPro.json"), "OneDarkPro");
+}
+
+function redefineBindings() {
+	// IntelliJ move lines binding
+	removeKeyBinding("editor.action.copyLinesDownAction");
+	removeKeyBinding("editor.action.copyLinesUpAction");
+	addKeyBinding("editor.action.moveLinesDownAction", monaco.KeyMod.Alt | monaco.KeyMod.Shift | monaco.KeyCode.DownArrow);
+	addKeyBinding("editor.action.moveLinesUpAction", monaco.KeyMod.Alt | monaco.KeyMod.Shift | monaco.KeyCode.UpArrow);
+
+	// Global folding and unfolding
+	addKeyBinding("editor.foldAll", monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.US_MINUS);
+	addKeyBinding("editor.unfoldAll", monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.US_EQUAL);
+
+	// Symbol rename
+	addKeyBinding("editor.action.rename", monaco.KeyMod.Shift | monaco.KeyCode.F6);
+}
+
+function removeKeyBinding(id) {
+	window._instance._standaloneKeybindingService.addDynamicKeybinding(`-${id}`, null, () => {});
+}
+
+function addKeyBinding(id, keys) {
+	const action = window._instance.getAction(id);
+	window._instance._standaloneKeybindingService.addDynamicKeybinding(id, keys, () => action.run());
+}
+
+setup();
 
 export default { };

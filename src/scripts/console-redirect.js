@@ -26,6 +26,7 @@ function lazyAppendDocumentFragment() {
 	if (elapsedSinceLastInsertion > INSERTION_THRESHOLD && fragment) {
 		outputElement.appendChild(fragment);
 		fragment = null;
+		lastInsertion = performance.now();
 	}
 }
 

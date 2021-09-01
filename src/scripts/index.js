@@ -6,10 +6,8 @@ import("@fortawesome/fontawesome-free/js/regular");
 import("@fortawesome/fontawesome-free/js/brands");
 import("./resize.js");
 import * as ConsoleRedirect from "./console-redirect.js";
-import Evaluator from "./evaluator.js";
+import * as Evaluator from "./evaluator.js";
 import Theme from "./theme.js";
-
-const evaluator = new Evaluator();
 
 async function onRunCode() {
 	// Fetch the source code from the monaco editor
@@ -22,7 +20,7 @@ async function onRunCode() {
 	ConsoleRedirect.clear();
 
 	// Evaluates the code
-	evaluator.run({ code: sourceCode, context: variables })
+	Evaluator.runInWorker({ code: sourceCode, context: variables })
 			 .then((result) => {
 				 if (result) {
 					 ConsoleRedirect.log("-- Program exited, output: ");

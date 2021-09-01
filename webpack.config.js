@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -45,8 +46,16 @@ module.exports = {
 				}
 			],
 		}),
+		new webpack.IgnorePlugin(
+			/^((fs)|(path)|(os)|(crypto)|(source-map-support))$/,
+			/vs(\/|\\)language(\/|\\)typescript(\/|\\)lib/
+		),
+		new webpack.ContextReplacementPlugin(
+			/monaco-editor(\\|\/)esm(\\|\/)vs(\\|\/)editor(\\|\/)common(\\|\/)services/
+		)
 	],
 	optimization: {
+		concatenateModules: true,
 		minimize: true,
 		minimizer: [
 			/* new TerserPlugin({
