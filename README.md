@@ -6,6 +6,12 @@ Don't worry with setting up an environment, HTML, CSS... You **Just code**
 	<img src="./.github/images/screenshot02.png"/>
 </center>
 
+<center>
+	<small>
+  		<a href="https://leandrosq.github.io/js-just-code/">Live demo</a>
+	</small>
+</center>
+
 ## Motivation
 I was tired of having to code in the DevTools console.
 I was tired of experimenting different Javascript playgrounds that never really suited my needs, and the only one that somewhat did was paid (Yeah I'm talking about you [Playcode](https://playcode.io/)!!)
