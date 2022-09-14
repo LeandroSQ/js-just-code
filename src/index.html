@@ -6,11 +6,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>JustCode</title>
 	</head>
-	<body>
+	<body style="opacity: 0">
 		<section id="wrapper">
-			<div class="container editor">
+			<div class="container editor" id="editor-container">
 				<header class="font">
-					<button onclick="settings(this)">
+					<button onclick="settingsModal.showModal()">
 						<i class="fas fa-cog"></i>
 					</button>
 
@@ -35,4 +35,26 @@
 			</div>
 		</section>
 	</body>
+
+	<dialog id="settingsModal">
+		<div class="header"><h1>Settings</h1></div>
+		<div class="content">
+			<label for="settingLightMode">
+				Light mode:
+				<input name="settingLightMode" value="false" type="checkbox"/>
+			</label>
+
+			<label for="settingEvaluator">
+				Evaluator type:
+				<select name="settingEvaluator">
+					<option value="sandbox" default>Sandbox</option>
+					<option value="worker">Background worker</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="footer">
+			<button value="confirm">OK</button>
+		</div>
+	</dialog>
 </html>

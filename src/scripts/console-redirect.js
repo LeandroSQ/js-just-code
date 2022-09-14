@@ -11,12 +11,12 @@ let timeoutHandle = null;
 function createLogElement(text, color) {
 	const element = document.createElement("pre");
 	element.classList.add("log-item");
-	element.style.color = color;
+	element.style.color = `var(--${color})`;
 	element.innerText = text;
 	if (logCount % 2 !== 0) element.classList.add("odd");
 
 	// Increment the log item count
-	logCount ++;
+	logCount++;
 
 	return element;
 }
@@ -30,9 +30,8 @@ function lazyAppendDocumentFragment() {
 	}
 }
 
-export function log(text, color=null) {
-	const _color = Theme.getColor(color || "foreground");
-	const element = createLogElement(text, _color);
+export function log(text, color) {
+	const element = createLogElement(text, color);
 
 	// Calculate the last time between an insertion
 	const elapsedSinceLastInsertion = performance.now() - lastInsertion;
@@ -50,9 +49,11 @@ export function log(text, color=null) {
 
 		// Schedule to lazy append them
 		if (!timeoutHandle) clearTimeout(timeoutHandle);
-		timeoutHandle = setTimeout(lazyAppendDocumentFragment, INSERTION_THRESHOLD);
+		timeoutHandle = setTimeout(
+			lazyAppendDocumentFragment,
+			INSERTION_THRESHOLD
+		);
 	}
-
 }
 
 function redirect(color, ...args) {
@@ -72,11 +73,11 @@ export function clear() {
 
 export function attachToContext(context) {
 	context["console"] = {
-		log: redirect.bind(null),
-		error: redirect.bind(null, Theme.getColor("error")),
-		warn: redirect.bind(null, Theme.getColor("warning")),
-		info: redirect.bind(null),
-		dir: redirect.bind(null),
-		debug: redirect.bind(null)
+		log: redirect.bind(null, "foreground"),
+		error: redirect.bind(null, "error"),
+		warn: redirect.bind(null, "warning"),
+		info: redirect.bind(null, "foreground"),
+		dir: redirect.bind(null, "foreground"),
+		debug: redirect.bind(null, "accent"),
 	};
 }

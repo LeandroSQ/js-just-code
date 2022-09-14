@@ -70,7 +70,7 @@ function onWorkerSetup() {
 
 	self.console = {
 		log: redirect.bind(null, "log"),
-		info: console.log, // redirect.bind(null, "log"),
+		info: redirect.bind(null, "log"),
 		dir: redirect.bind(null, "log"),
 		debug: redirect.bind(null, "log"),
 		error: redirect.bind(null, "error"),

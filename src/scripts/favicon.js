@@ -18,15 +18,15 @@ async function fetchFaviconSvg() {
 	return svg;
 }
 
-function removeAllFavIcons() {
-	const elements = [...document.querySelectorAll("link[rel='shortcut icon']")];
+function removeAllFavIcons(rel) {
+	const elements = [...document.querySelectorAll(`link[rel='${rel}']`)];
 	elements.forEach((x) => x.parentElement.removeChild(x));
 }
 
-function createFavicon() {
+function createFavicon(rel) {
 	const linkElement = document.createElement("link");
-	linkElement.rel = "shortcut icon";
-	linkElement.type = "image/x-icon";
+	linkElement.rel = rel;
+	linkElement.type = rel == "apple-touch-icon" ? "image/png" : "image/x-icon";
 
 	return linkElement;
 }
@@ -63,19 +63,38 @@ function svgToImage(svg) {
 }
 
 export async function changeIconColor(color) {
-	// Remove the previous
-	removeAllFavIcons();
+	async function doIt(rel) {
+		// Remove the previous
+		removeAllFavIcons(rel);
 
-	// Creates the link element
-	const linkElement = createFavicon();
-	// Fetches the svg data
-	const svg = await fetchFaviconSvg();
-	const image = await svgToImage(svg);
+		// Creates the link element
+		const linkElement = createFavicon(rel);
 
-	// Tints the image
-	const tintedImage = tintImage(image, color);
+		// Fetches the svg data
+		const svg = await fetchFaviconSvg();
+		const image = await svgToImage(svg);
 
-	// Append it to the document head
-	linkElement.href = tintedImage.toDataURL();
-	document.head.appendChild(linkElement);
+		// Tints the image
+		const tintedImage = tintImage(image, color);
+
+		// Append it to the document head
+		if (rel == "apple-touch-icon") {
+			tintedImage.toBlob((blob) => {
+				linkElement.href = URL.createObjectURL(blob);
+				document.head.appendChild(linkElement);
+			}, "image/png");
+		} else {
+			linkElement.href = tintedImage.toDataURL();
+			document.head.appendChild(linkElement);
+		}
+	}
+
+	// Webkit - Chrome
+	await doIt("shortcut icon");
+
+	// Webkit - Safari
+	await doIt("apple-touch-icon");
+
+	// Other
+	await doIt("icon");
 }

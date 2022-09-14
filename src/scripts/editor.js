@@ -59,6 +59,7 @@ import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import "monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution.js";
 import "monaco-editor/esm/vs/language/typescript/monaco.contribution.js";
 import Theme from "./theme.js";
+import * as Settings from "./settings.js";
 
 self.MonacoEnvironment = {
 	getWorkerUrl: function(a, b) {
@@ -93,6 +94,8 @@ measure(() => {
 		useTabStops: true,
 		insertSpaces: false,
 		wordWrapMinified: true,
+		showFoldingControls: "always",
+		automaticLayout: false,
 		wrappingIndent: "indent",
 		padding: {
 			top: 10,
@@ -103,7 +106,7 @@ measure(() => {
 		},
 		language: "javascript"
 	});
-	
+
 	monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
 		noSemanticValidation: true,
 		noSyntaxValidation: false
@@ -118,7 +121,11 @@ measure(() => {
 
 	redefineBindings();
 
-	Theme.loadTheme(import("./../themes/OneDarkPro.json"), "OneDarkPro");
+	// Define the theme to load based on preferences
+	const theme = Settings.settings.lightMode ? "XCode" : "OneDarkPro";
+
+	// Import the theme
+	Theme.loadTheme(import(`./../themes/${theme}.json`), theme);
 }
 
 function redefineBindings() {

@@ -13,15 +13,18 @@ function updateLayoutSizing(relativeWidth) {
 	const windowHeight = document.body.offsetHeight;
 
 	// Set the normalized positions to the elements
-	editorContainerElement.style.flex = relativeWidth;
-	outputContainerElement.style.flex = 1 - relativeWidth;
+	editorContainerElement.style.width = `${relativeWidth * windowWidth}px`;
+	outputContainerElement.style.width = `${(1 - relativeWidth) * windowWidth - 3.33}px`;
+	// editorContainerElement.style.flex = relativeWidth;
+	// outputContainerElement.style.flex = 1 - relativeWidth;
+	// outputContainerElement.style.maxWidth = (1 - relativeWidth) * windowWidth - 10;
 
 	normalizedPosition = relativeWidth;
 
 	// Update monaco editor
 	window._instance.layout({
-		width: windowWidth * relativeWidth - resizeElement.offsetWidth / 2,
-		height: windowHeight
+		width: windowWidth * relativeWidth - resizeElement.offsetWidth,
+		height: windowHeight - 40
 	});
 }
 
@@ -71,11 +74,11 @@ function attachEventListeners() {
 
 function loadLayoutSizingFromLocalStorage() {
 	// Load the horizontal layout from the local storage
-	const layoutSizing = localStorage.getItem("layout-sizing");
-	if (layoutSizing) updateLayoutSizing(parseFloat(layoutSizing));
+	const layoutSizing = localStorage.getItem("layout-sizing") || normalizedPosition;
+	updateLayoutSizing(parseFloat(layoutSizing));
 }
 
-window.addEventListener("load", (e) => {
+window.addLoadEventListener((e) => {
 	loadLayoutSizingFromLocalStorage();
 
 	attachEventListeners();

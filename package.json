@@ -1,14 +1,13 @@
 {
-	"name": "monaco-editor-samples",
-	"version": "1.0.0",
-	"description": "Samples for using the Monaco Editor",
-	"main": "index.js",
-	"author": "Microsoft Corporation",
+	"name": "js-just-code",
+	"version": "1.2.0",
+	"description": "A in-browser JavaScript playground",
+	"main": "dist/index.html",
+	"author": "LeandroSQ",
 	"license": "MIT",
 	"scripts": {
-		"build": "rm -rf ./dist && node node_modules/webpack/bin/webpack.js --progress",
-		"generate-imports": "node generate-imports.js",
-		"dev": "npx webpack serve"
+		"build": "rm -rf ./dist && webpack --progress --config webpack.prod.js",
+		"dev": "npx webpack serve --config webpack.dev.js"
 	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^5.15.4",
@@ -23,9 +22,7 @@
 		"pretty-quick": "^3.1.0",
 		"style-loader": "^2.0.0",
 		"ts-loader": "^8.0.17",
-		"typescript": "^4.2.3"
-	},
-	"devDependencies": {
+		"typescript": "^4.2.3",
 		"monaco-editor-webpack-plugin": "^3.0.1",
 		"html-webpack-plugin": "^5.3.1",
 		"webpack": "^5.24.4",

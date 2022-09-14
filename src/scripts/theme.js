@@ -73,6 +73,7 @@ export default {
 
 		onThemeLoaded();
 	},
+
 	getColor(name) {
 		if (name in colours) return colours[name];
 		else return name;

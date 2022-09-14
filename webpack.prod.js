@@ -32,7 +32,7 @@ module.exports = {
 		contentBase: ["./src"], // both src and output dirs
 		inline: true,
 		compress: true,
-		port: 9000,
+		port: 3000,
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
@@ -46,10 +46,10 @@ module.exports = {
 				}
 			],
 		}),
-		new webpack.IgnorePlugin(
-			/^((fs)|(path)|(os)|(crypto)|(source-map-support))$/,
-			/vs(\/|\\)language(\/|\\)typescript(\/|\\)lib/
-		),
+		new webpack.IgnorePlugin({
+			resourceRegExp: /^((fs)|(path)|(os)|(crypto)|(source-map-support))$/,
+			contextRegExp: /vs(\/|\\)language(\/|\\)typescript(\/|\\)lib/
+		}),
 		new webpack.ContextReplacementPlugin(
 			/monaco-editor(\\|\/)esm(\\|\/)vs(\\|\/)editor(\\|\/)common(\\|\/)services/
 		)
@@ -58,11 +58,11 @@ module.exports = {
 		concatenateModules: true,
 		minimize: true,
 		minimizer: [
-			/* new TerserPlugin({
+			new TerserPlugin({
 				terserOptions: {
 					sourceMap: true
 				}
-			}), */
+			}),
 
 			new JsonMinimizerPlugin()
 		],

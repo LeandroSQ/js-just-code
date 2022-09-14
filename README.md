@@ -2,7 +2,9 @@
 The best way to prototype with JS.
 Don't worry with setting up an environment, HTML, CSS... You **Just code**
 
-![Screenshot01](./.github/images/screenshot01.png)
+<center>
+	<img src="./.github/images/screenshot02.png"/>
+</center>
 
 ## Motivation
 I was tired of having to code in the DevTools console.
@@ -22,4 +24,6 @@ The philosophy of JustCode, as the name suggests, is to provide an environment t
 | [VM Browser polyfill](https://github.com/snanovskyi/vm-browser) | Not used anymore, but serves as inspiration for [evaluator.js](./src/evaluator.js) |
 | [Monaco themes](https://github.com/brijeshb42/monaco-themes) | Providing beautiful color themes for the editor |
 | [Monaco theme converter](https://github.com/Nishkalkashyap/monaco-vscode-textmate-theme-converter) | For converting VSCode themes |
-| [One Dark Pro](https://github.com/Binaryify/OneDark-Pro) | The theme used in the editor |
+| [Jetbrains Mono font](https://www.jetbrains.com/lp/mono/) | The font used in the UI and Editor |
+| [One Dark Pro theme](https://github.com/Binaryify/OneDark-Pro) | The dark theme used in the editor |
+| [XCode theme](https://github.com/smockle-archive/xcode-default-theme) | The light theme used in the editor |
